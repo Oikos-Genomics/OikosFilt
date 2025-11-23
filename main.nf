@@ -33,8 +33,8 @@ workflow {
         min_qual = ${params.min_qual}
         min_gq = ${params.min_gq}
         min_maf = ${params.min_maf}
-        max_miss_ind = ${params.max_miss_ind}
-        max_miss_site = ${params.max_miss_ind}
+        max_fmiss_ind = ${params.max_fmiss_ind}
+        max_fmiss_site = ${params.max_fmiss_ind}
     """.stripIndent()
     
     if (!params.vcf) {
