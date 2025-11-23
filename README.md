@@ -26,18 +26,18 @@ The following table documents all options specific to `OikosMap`:
 
 | Option | Default | Data type | Description |
 | -- | -- | -- | -- |
-| `--help`  | `FALSE` | Flag | Print a help message and exit. |
-| `--vcf` | `null` | String | Path to the variant file to be filtered. |
-| `--prefix` | `out` | String | Name of your output vcf. |
-| `--threads` | `nproc/2` | Int | Number of threads available to the program. Defaults to $\frac{1}{2}$ the number on the host machine. |
-| `--bi_snps` | `TRUE` | Flag | Whether or not remove indels and multiallelic SNPs. Evaluated per individual per site. |
-| `--dp_95ile` | `TRUE` | Flag | Whether or not remove sites with a depth score lower than the `2.5%ile` OR higher than the `97.5ile`. Evaluated per individual per site. |
-| `--min_dp` | `10` | Int | Minimum depth allowed in the file, per individual per site. Evaluated per individual per site, *after* `--dp_95ile`. Set to `null` to disable. |
-| `--min_qual` | `20` | Int | Minimum per-site SNP quality (QUAL) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
-| `--min_gq` | `20` | Int | Minimum genotype quality (GQ) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
-| `--min_maf` | `0.03` | Float | Minimum minor allele frequency (MAF) allowed in the file. Evaluated per site. Set to `null` to disable. |
-| `--max_fmissing` | `0.1` | Float | Maximum proportion of missing data allowed across all individuals at a given site. Evaluated per site. |
-
+| `--help`/`-h`  | `FALSE` | Flag | Print a help message and exit. |
+| `--vcf`/`-v` | `null` | String | Path to the variant file to be filtered. |
+| `--prefix`/`-pre` | `out` | String | Name of your output vcf. |
+| `--threads`/`-t` | `nproc/2` | Int | Number of threads available to the program. Defaults to $\frac{1}{2}$ the number on the host machine. |
+| `--bi_snps`/`-bi` | `TRUE` | Flag | Whether or not remove indels and multiallelic SNPs. Evaluated per individual per site. |
+| `--dp_95ile`/`-d95` | `TRUE` | Flag | Whether or not remove sites with a depth score lower than the `2.5%ile` OR higher than the `97.5ile`. Evaluated per individual per site. |
+| `--min_dp`/`-md` | `10` | Int | Minimum depth allowed in the file, per individual per site. Evaluated per individual per site, *after* `--dp_95ile`. Set to `null` to disable. |
+| `--min_qual`/`-mq` | `20` | Int | Minimum per-site SNP quality (QUAL) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
+| `--min_gq`/`-mgq` | `20` | Int | Minimum genotype quality (GQ) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
+| `--min_maf`/`-mm` | `0.03` | Float | Minimum minor allele frequency (MAF) allowed in the file. Evaluated per site. Set to `null` to disable. |
+| `--max_fmiss_ind` | `0.1` | Float | Maximum proportion of missing data allowed per individual across all sites. |
+| `--max_fmiss_site` | `0.1` | Float | Maximum proportion of missing data allowed across all individuals at a given site. Evaluated per site. |
 
 ## High-level Description
 
