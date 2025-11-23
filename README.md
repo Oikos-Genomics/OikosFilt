@@ -22,7 +22,7 @@ nextflow run OikosFilt.nf --vcf <input.vcf.gz> --prefix <output_prefix>
 
 All native options in `NextFlow` are usable in `OikosFilt` - their documentation can be found [here](https://www.nextflow.io/docs/latest/cli.html).
 `-with-trace` and `-with-report` are useful for providing usage stats, and the author recommends enabling them.
-The following table documents all options specific to `OikosMap`:
+The following table documents all options specific to `OikosFilt`:
 
 | Option | Default | Data type | Description |
 | -- | -- | -- | -- |
@@ -64,7 +64,7 @@ All outputs are written to `${prefix}_results/` in your working directory.
 
 ### Flowchart
 
-<img title="OikosMap flowchart" alt="A graphic indicating the filtering process." src="images/OikosFilt_flowchart.png">
+<img title="OikosFilt flowchart" alt="A graphic indicating the filtering process." src="images/OikosFilt_flowchart.png">
 
 
 ## Known limitations
@@ -80,7 +80,7 @@ You will need to install both of these for the pipeline to run.
 
 ### Requirements
 
-The `OikosMap` pipeline is undemanding, and will run on effectively any Linux environment.
+The `OikosFilt` pipeline is undemanding, and will run on effectively any Linux environment.
 It does not require GPU support.
 
 ## Runtime
