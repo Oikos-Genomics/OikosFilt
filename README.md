@@ -36,8 +36,8 @@ The following table documents all options specific to `OikosMap`:
 | `--min_qual`/`-mq` | `20` | Int | Minimum per-site SNP quality (QUAL) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
 | `--min_gq`/`-mgq` | `20` | Int | Minimum genotype quality (GQ) allowed in the file. Evaluated per individual per site. Set to `null` to disable. |
 | `--min_maf`/`-mm` | `0.03` | Float | Minimum minor allele frequency (MAF) allowed in the file. Evaluated per site. Set to `null` to disable. |
-| `--max_fmiss_ind` | `0.1` | Float | Maximum proportion of missing data allowed per individual across all sites. |
-| `--max_fmiss_site` | `0.1` | Float | Maximum proportion of missing data allowed across all individuals at a given site. Evaluated per site. |
+| `--max_fmiss_ind`/`-fmi` | `0.1` | Float | Maximum proportion of missing data allowed per individual across all sites. |
+| `--max_fmiss_site`/`-fms` | `0.1` | Float | Maximum proportion of missing data allowed across all individuals at a given site. Evaluated per site. |
 
 ## High-level Description
 
