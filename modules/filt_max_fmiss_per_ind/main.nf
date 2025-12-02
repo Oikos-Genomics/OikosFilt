@@ -6,11 +6,11 @@ process FILT_MAX_FMISS_PER_IND{
     val max_fmiss_ind
 
     output:
-    path "${vcf.baseName}_${filt_name}.vcf", emit: filt_vcf
-    tuple val("${vcf.baseName}"), path("${vcf.baseName}_${filt_name}_variants.count"), emit: variant_counts
+    path "${vcf.simpleName}_${filt_name}.vcf", emit: filt_vcf
+    tuple val("${vcf.simpleName}"), path("${vcf.simpleName}_${filt_name}_variants.count"), emit: variant_counts
 
     script:
-    filt_name = "max_fmiss_per_ind_${max_fmiss_ind}"
+    filt_name = "max_fmiss_per_ind_${max_fmiss_ind.toString().replace('.','')}"
     """
 
     vcftools --vcf ${vcf} --missing-indv
@@ -28,9 +28,9 @@ process FILT_MAX_FMISS_PER_IND{
     done < inds_and_depths.tsv
 
     inds_to_remove=\${inds_to_remove%?}
-    bcftools view ${vcf} -s \${inds_to_remove} -Ov -o ${vcf.baseName}_${filt_name}.vcf
+    bcftools view ${vcf} -s \${inds_to_remove} -Ov -o ${vcf.simpleName}_${filt_name}.vcf
 
-    bcftools view -H ${vcf.baseName}_${filt_name}.vcf | wc -l > ${vcf.baseName}_${filt_name}_variants.count
+    bcftools view -H ${vcf.simpleName}_${filt_name}.vcf | wc -l > ${vcf.simpleName}_${filt_name}_variants.count
 
     """
 }

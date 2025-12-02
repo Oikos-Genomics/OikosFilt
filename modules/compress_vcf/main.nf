@@ -5,7 +5,7 @@ process COMPRESS_VCF {
     path vcf
 
     output:
-    path "${vcf.baseName}.vcf.gz", emit: filt_vcf
+    path "${vcf.simpleName}.vcf.gz", emit: filt_vcf
 
     script:
     """
