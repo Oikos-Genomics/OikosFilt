@@ -16,7 +16,7 @@ process FILT_MAX_FMISS_PER_SITE{
     bcftools view -i "F_MISSING < ${max_fmiss_site}" ${vcf} -Ov -o ${vcf.simpleName}_${filt_name}.vcf
     # Count variants and save to file
     bcftools view -H ${vcf.simpleName}_${filt_name}.vcf | wc -l >> ${params.prefix}_variants.count
-    
+
 
     """
 }

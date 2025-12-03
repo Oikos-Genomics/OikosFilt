@@ -55,7 +55,6 @@ workflow {
     if (params.bi_snps) {
         GET_BI_SNPS(SPLIT_VCF.out.individual_vcfs.flatten())
         ch_bi_snps = GET_BI_SNPS.out.filt_vcf.flatten()
-        //ch_var_count = GET_BI_SNPS.out.var_count.flatten()
     } else {
         ch_bi_snps = SPLIT_VCF.out.individual_vcfs.flatten()
     }
