@@ -12,6 +12,6 @@ workflow DEPTH_FILTER {
 
     emit:
     filt_vcf = FILT_MIN_DP.out.filt_vcf
-    variant_counts_95ile = GET_95ILE_DP.out.variant_counts
-    variant_counts_min_dp = FILT_MIN_DP.out.variant_counts
+    var_count_95ile = GET_95ILE_DP.out.var_count
+    var_count_min_dp = FILT_MIN_DP.out.var_count
 }

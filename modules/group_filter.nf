@@ -35,8 +35,8 @@ workflow GROUP_FILTER {
 
     emit:
     filt_vcf = ch_filt_vcf.filt_vcf
-    variant_counts_min_maf = ch_maf.variant_counts
-    variant_counts_max_fmiss_ind = ch_fmiss_ind.variant_counts
-    variant_counts_max_fmiss_site = ch_fmiss_site.variant_counts
+    var_count_min_maf = ch_maf.var_count
+    var_count_max_fmiss_ind = ch_fmiss_ind.var_count
+    var_count_max_fmiss_site = ch_fmiss_site.var_count
 
 }

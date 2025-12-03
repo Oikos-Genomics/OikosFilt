@@ -43,18 +43,23 @@ workflow {
 
     // Input channel
     ch_vcf = channel.fromPath(params.vcf)
+    // List to hold variant counts
+    def ch_var_count
 
     // Split VCF into individual files
     SPLIT_VCF(ch_vcf)
+    ch_var_count = SPLIT_VCF.out.var_count.flatten()
 
     // filter bi-allelic SNPs only, if desired
     def ch_bi_snps
     if (params.bi_snps) {
         GET_BI_SNPS(SPLIT_VCF.out.individual_vcfs.flatten())
         ch_bi_snps = GET_BI_SNPS.out.filt_vcf.flatten()
+        //ch_var_count = GET_BI_SNPS.out.var_count.flatten()
     } else {
         ch_bi_snps = SPLIT_VCF.out.individual_vcfs.flatten()
     }
+
 
     // apply depth and quality filters, if desired (by default both are applied)
     def ch_dp
@@ -88,8 +93,14 @@ workflow {
 
     publish:
     final_vcf = COMPRESS_VCF(ch_group_filt)
+    var_report = ch_var_count
 }
 
 output {
-    final_vcf {}
+    final_vcf {
+        path params.prefix
+    }
+    var_report {
+        path params.prefix
+    }
 }

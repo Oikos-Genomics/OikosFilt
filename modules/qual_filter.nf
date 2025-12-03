@@ -13,6 +13,6 @@ workflow QUALITY_FILTER {
 
     emit:
     filt_vcf = FILT_MIN_QUAL.out.filt_vcf
-    variant_counts_min_qual = FILT_MIN_QUAL.out.variant_counts
-    variant_counts_min_gq = FILT_MIN_GQ.out.variant_counts
+    var_count_min_qual = FILT_MIN_QUAL.out.var_count
+    var_count_min_gq = FILT_MIN_GQ.out.var_count
 }
