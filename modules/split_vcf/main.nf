@@ -6,7 +6,7 @@ process SPLIT_VCF {
 
     output:
     path "*.vcf", emit: individual_vcfs
-    path "${params.prefix}_variants.count", emit: var_count
+    path "${params.prefix}_variants.count", emit: var_rec
 
     script:
     filt_name = "split"

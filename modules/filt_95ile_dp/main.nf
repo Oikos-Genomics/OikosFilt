@@ -6,7 +6,7 @@ process GET_95ILE_DP{
 
     output:
     path "${vcf.simpleName}_${filt_name}.vcf", emit: filt_vcf
-    path "${params.prefix}_variants.count", emit: var_count
+    path "${params.prefix}_variants.count", emit: var_count 
 
     script:
     filt_name = "95ile_dp"

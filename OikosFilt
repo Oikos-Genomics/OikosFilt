@@ -3,6 +3,7 @@
 
 from argparse import ArgumentParser
 import subprocess
+import os
 
 def main():
     ### DEFINE AND CHECK ARGS
@@ -26,7 +27,10 @@ def main():
 
     nf_variables = ['profile', 'with_trace', 'with_report']
     # Build a single command string from all provided arguments
-    command_items = ['./main.nf']
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    main_nf_path = os.path.join(script_dir, 'main.nf')
+    command_items = [main_nf_path]
     for name, value in vars(args).items():
         if value is None:
             continue

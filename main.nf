@@ -48,12 +48,11 @@ workflow {
 
     // Split VCF into individual files
     SPLIT_VCF(ch_vcf)
-    ch_var_count = SPLIT_VCF.out.var_count.flatten()
-
+    ch_var_count = SPLIT_VCF.out.var_rec
     // filter bi-allelic SNPs only, if desired
     def ch_bi_snps
     if (params.bi_snps) {
-        GET_BI_SNPS(SPLIT_VCF.out.individual_vcfs.flatten())
+        GET_BI_SNPS(SPLIT_VCF.out.individual_vcfs.flatten(), SPLIT_VCF.out.var_rec)
         ch_bi_snps = GET_BI_SNPS.out.filt_vcf.flatten()
     } else {
         ch_bi_snps = SPLIT_VCF.out.individual_vcfs.flatten()
