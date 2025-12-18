@@ -2,8 +2,7 @@ process GET_BI_SNPS {
     tag "$vcf"
 
     input:
-    path vcf
-    path var_rec
+    tuple path(vcf), path(var_rec)
 
     output:
     path "${vcf.simpleName}_${filt_name}.vcf", emit: filt_vcf
