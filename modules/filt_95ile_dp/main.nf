@@ -1,12 +1,13 @@
-process GET_95ILE_DP{
+process FILT_95ILE_DP{
     tag "$vcf"
 
     input:
     path vcf
+    path var_counts
 
     output:
     path "${vcf.simpleName}_${filt_name}.vcf", emit: filt_vcf
-    path "${params.prefix}_variants.count", emit: var_count 
+    path "${params.prefix}_${vcf.simpleName}_${filt_name}_var_count.txt", emit: var_count
 
     script:
     filt_name = "95ile_dp"
@@ -19,8 +20,12 @@ process GET_95ILE_DP{
     # Filter variants based on DP 95% CI
     bcftools filter -e "FORMAT/DP<\$lower_bound || FORMAT/DP>\$upper_bound" ${vcf} -Ov -o ${vcf.simpleName}_${filt_name}.vcf
 
-    # Count variants and save to file
-    bcftools view -H ${vcf.simpleName}_${filt_name}.vcf | wc -l >> ${params.prefix}_variants.count
 
+    ## Find the var_count file with the largest file size (ie, the one with the most entries)
+    #var_count_file=\$(du -a ./*_var_count.txt | sort -nr | head -n 1)
+
+    # Count variants and save to file
+    var_count=\$(bcftools view -H ${vcf.simpleName}_${filt_name}.vcf | wc -l)
+    echo -e "${vcf.simpleName}\t${filt_name}\t\${var_count}" >> ${params.prefix}_${vcf.simpleName}_${filt_name}_var_count.txt
     """
 }

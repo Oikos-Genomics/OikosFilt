@@ -6,14 +6,17 @@ process SPLIT_VCF {
 
     output:
     path "*.vcf", emit: individual_vcfs
-    path "${params.prefix}_variants.count", emit: var_rec
+    path "${params.prefix}_${vcf.simpleName}_${filt_name}_var_count.txt", emit: var_count
+    
 
     script:
-    filt_name = "split"
+    filt_name = "split_vcf"
+
     """
     # Get total number of variants (SNPS+indels)
+    echo -e "vcf_name\tfilter_name\tvariant_count" >> ${params.prefix}_${vcf.simpleName}_${filt_name}_var_count.txt
     var_count=\$(bcftools view -H ${vcf} | wc -l)
-    echo -e "${vcf.simpleName}\t${filt_name}\t\$var_count" >> ${params.prefix}_variants.count
+    echo -e "${vcf.simpleName}\t${filt_name}\t\${var_count}" >> ${params.prefix}_${vcf.simpleName}_${filt_name}_var_count.txt
 
     # Get list of samples
     bcftools query -l ${vcf} > samples.txt
