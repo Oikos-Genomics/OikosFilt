@@ -27,7 +27,6 @@ workflow {
         prefix: ${params.prefix}
         threads = ${params.threads}
         bi_snps: ${params.bi_snps}
-        min_dp: ${params.min_dp}
         dp_95ile = ${params.dp_95ile}
         min_dp = ${params.min_dp}
         min_qual = ${params.min_qual}
@@ -55,7 +54,7 @@ workflow {
     if (params.bi_snps) {
         GET_BI_SNPS(SPLIT_VCF.out.individual_vcfs.flatten().combine(ch_var_count)) //this needs to be a product
         ch_bi_snps = GET_BI_SNPS.out.filt_vcf.flatten()
-        ch_var_count = GET_BI_SNPS.out.var_count.flatten()
+        //ch_var_count = GET_BI_SNPS.out.var_count.flatten()
     } else {
         ch_bi_snps = SPLIT_VCF.out.individual_vcfs.flatten()
     }
@@ -66,7 +65,7 @@ workflow {
     if (params.dp_95ile || params.min_dp) {
         DEPTH_FILTER(ch_bi_snps, ch_var_count.collect(), params.min_dp)
         ch_dp = DEPTH_FILTER.out.filt_vcf
-        ch_var_count = DEPTH_FILTER.out.var_count.flatten()
+        //ch_var_count = DEPTH_FILTER.out.var_count.flatten()
 
     } else {
         ch_dp = ch_bi_snps
@@ -76,7 +75,7 @@ workflow {
     if (params.min_qual || params.min_gq) {
         QUAL_FILTER(ch_dp, ch_var_count.collect(), params.min_qual, params.min_gq)
         ch_qual = QUAL_FILTER.out.filt_vcf
-        ch_var_count = QUAL_FILTER.out.var_count.flatten()
+        //ch_var_count = QUAL_FILTER.out.var_count.flatten()
     } else {
         ch_qual = ch_dp
     }
@@ -96,14 +95,17 @@ workflow {
 
     publish:
     final_vcf = COMPRESS_VCF(ch_group_filt)
-    var_report = ch_var_count
+    var_report = SPLIT_VCF.out.var_count.flatten()
 }
 
 output {
     final_vcf {
-        path params.prefix
+        path "${params.prefix}_vcf"
     }
     var_report {
-        path params.prefix
+        path "${params.prefix}_varcount_report"
+        index {
+            path "individual_varcounts.csv"
+        }
     }
 }
